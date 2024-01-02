@@ -13,6 +13,10 @@ export class UsersService {
     return this.userRepository.find();
   }
 
+  async findByUsername(username: string): Promise<User> {
+    return this.userRepository.findOne({ username });
+  }
+
   async create(user: User): Promise<User> {
     return this.userRepository.save(user);
   }
