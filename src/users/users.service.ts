@@ -13,8 +13,27 @@ export class UsersService {
     return this.userRepository.find();
   }
 
+  async findMany(query): Promise<User[] | undefined> {
+    //?
+    const user = await this.userRepository.find({
+      where: [
+        {
+          username: query,
+        },
+        { email: query },
+      ],
+    });
+
+    return user;
+  }
+
+  async findById(id: number): Promise<User> {
+    const user = await this.userRepository.findOneBy({ id });
+    return user;
+  }
+
   async findByUsername(username: string): Promise<User> {
-    return this.userRepository.findOne({ username });
+    return this.userRepository.findOneBy({ username });
   }
 
   async create(user: User): Promise<User> {
