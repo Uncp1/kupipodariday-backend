@@ -13,6 +13,7 @@ import { UsersService } from './users.service';
 import { JwtGuard } from 'src/guards/jwt.guard';
 import { UserRequest } from 'src/utils/types';
 import { Wish } from 'src/wishes/entities/wish.entity';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @UseGuards(JwtGuard)
 @Controller('users')
@@ -20,9 +21,8 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Post()
-  //update later to createUserDto
-  create(@Body() user: User): Promise<User> {
-    return this.usersService.create(user);
+  create(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return this.usersService.create(createUserDto);
   }
 
   @Get('me')

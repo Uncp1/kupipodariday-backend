@@ -30,6 +30,13 @@ export class User {
   username: string;
 
   @Column({
+    default: 'Пока ничего не рассказал о себе',
+  })
+  @Min(2)
+  @Max(200)
+  about: string;
+
+  @Column({
     default: '',
   })
   @IsUrl()
