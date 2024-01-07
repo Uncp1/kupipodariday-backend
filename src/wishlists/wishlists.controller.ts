@@ -1,4 +1,4 @@
-import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { WishlistsService } from './wishlists.service';
 import { JwtGuard } from 'src/guards/jwt.guard';
 
@@ -6,6 +6,9 @@ import { JwtGuard } from 'src/guards/jwt.guard';
 @Controller('wishlists')
 export class WishlistsController {
   constructor(private wishlistsService: WishlistsService) {}
+
+  @Post()
+  create(@Body) {}
 
   @Get()
   findAll() {
