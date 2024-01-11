@@ -20,7 +20,7 @@ export class UsersService {
   ) {}
 
   async findAll(): Promise<User[]> {
-    return this.userRepository.find();
+    return await this.userRepository.find();
   }
 
   async findMany(query): Promise<User[] | undefined> {
@@ -36,12 +36,11 @@ export class UsersService {
   }
 
   async findById(id: number): Promise<User> {
-    const user = await this.userRepository.findOneBy({ id });
-    return user;
+    return await this.userRepository.findOne({ where: { id: id } });
   }
 
   async findByUsername(username: string): Promise<User> {
-    return this.userRepository.findOneBy({ username });
+    return await this.userRepository.findOne({ where: { username: username } });
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
