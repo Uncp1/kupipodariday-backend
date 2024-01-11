@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Wishlist } from './entities/wishlist.entity';
 import { Repository } from 'typeorm';
+import { CreateWishlistDto } from './dto/create-wishlist.dto';
 
 @Injectable()
 export class WishlistsService {
@@ -10,6 +11,16 @@ export class WishlistsService {
     private wishlistRepository: Repository<Wishlist>,
   ) {}
 
+  async create(
+    createWishlistDto: CreateWishlistDto,
+    ownerId: number,
+  ): Promise<Wishlist> {
+    const wishlist = await this.wishlistRepository.create({
+      ...createWishlistDto,
+      owner: { id: ownerId },
+    });
+    return this.wishlistRepository.save(wishlist);
+  }
   async findAll(): Promise<Wishlist[]> {
     return this.wishlistRepository.find();
   }

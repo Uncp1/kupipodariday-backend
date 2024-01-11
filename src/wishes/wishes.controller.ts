@@ -4,7 +4,6 @@ import { JwtGuard } from 'src/guards/jwt.guard';
 import { Wish } from './entities/wish.entity';
 import { UserRequest } from 'src/utils/types';
 import { CreateWishDto } from './dto/create-wish-dto';
-import { User } from 'src/users/entities/user.entity';
 
 @Controller('wishes')
 export class WishesController {
