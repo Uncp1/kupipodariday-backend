@@ -43,7 +43,7 @@ export class UsersService {
     return await this.userRepository.findOne({ where: { username: username } });
   }
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
     try {
       const { password } = createUserDto;
 
