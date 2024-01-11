@@ -1,11 +1,30 @@
-import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { OffersService } from './offers.service';
 import { JwtGuard } from 'src/guards/jwt.guard';
+import { Offer } from './entities/offer.entity';
+import { UserRequest } from 'src/utils/types';
+import { CreateOfferDto } from './dto/create-offer.dto';
 
 @UseGuards(JwtGuard)
 @Controller('offers')
 export class OffersController {
   constructor(private offersService: OffersService) {}
+
+  @Post()
+  create(
+    @Req() req: UserRequest,
+    @Body() createOfferDto: CreateOfferDto,
+  ): Promise<Offer> {
+    return this.offersService.createOffer(req.user.id, createOfferDto);
+  }
 
   @Get()
   findAll() {
@@ -13,7 +32,7 @@ export class OffersController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) {
-    return this.offersService.findOne(id);
+  findOne(@Param('id') id: string): Promise<Offer | object> {
+    return this.offersService.findOne(+id);
   }
 }
