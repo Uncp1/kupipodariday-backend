@@ -1,7 +1,7 @@
 {
   "name": "kupipodariday-backend",
   "version": "0.0.1",
-  "description": "",
+  "description": "Проект \"КупиПодариДай\" - учебный проект сервиса вишлистов подарков. Работа выполнена на курсе Web+ от Yandex Практикум.",
   "author": "Fidler Viktor",
   "private": true,
   "license": "UNLICENSED",
