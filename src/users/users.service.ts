@@ -44,9 +44,14 @@ export class UsersService {
   }
 
   async createUser(createUserDto: CreateUserDto): Promise<User> {
-    try {
-      const { password } = createUserDto;
+    const { password, username } = createUserDto;
 
+    const userSearch = await this.findByUsername(username);
+    if (userSearch) {
+      throw new UserAlreadyExistsException();
+    }
+
+    try {
       const hash = await this.hashService.hash(password);
       const user = this.userRepository.create({
         ...createUserDto,
@@ -55,7 +60,7 @@ export class UsersService {
       await this.userRepository.insert(user);
       return user;
     } catch (err) {
-      throw new UserAlreadyExistsException();
+      throw new Error(err);
     }
   }
 
@@ -75,7 +80,7 @@ export class UsersService {
   }
 
   async findUserWishes(username: string): Promise<Wish[]> {
-    const user = await this.findByUsername(username); //mb change to id(?)
+    const user = await this.findByUsername(username);
     if (!user) {
       throw new UserNotFoundException();
     }

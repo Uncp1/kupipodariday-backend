@@ -15,6 +15,6 @@ export default () => ({
     synchronize: true,
   } as PostgresConnectionOptions,
 
-  secretKey: process.env.JWT_SECRET || 'super-strong-secret',
+  secretKey: process.env.JWT_SECRET || 'secretKey',
   saltRound: process.env.SALT_ROUND || 10,
 });
