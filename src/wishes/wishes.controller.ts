@@ -30,7 +30,7 @@ export class WishesController {
     return this.wishesService.findAll();
   }
 
-  @Get('recent')
+  @Get('last')
   getRecentWish(): Promise<Wish[]> {
     return this.wishesService.findRecentWishes();
   }

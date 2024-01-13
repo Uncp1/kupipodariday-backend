@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
 import { UsersModule } from './users/users.module';
 import { HashModule } from './hash/hash.module';
 import { WishesModule } from './wishes/wishes.module';
@@ -28,7 +27,7 @@ import configuration from './config/configuration';
     WishlistsModule,
     OffersModule,
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [],
 })
 export class AppModule {}
