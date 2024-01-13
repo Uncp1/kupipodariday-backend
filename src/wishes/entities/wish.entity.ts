@@ -1,34 +1,18 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  ManyToMany,
-} from 'typeorm';
-import { Min, Max, IsUrl } from 'class-validator';
+import { Column, Entity, ManyToOne, OneToMany, ManyToMany } from 'typeorm';
+import { Min, Max, IsUrl, IsInt } from 'class-validator';
 import { Offer } from '../../offers/entities/offer.entity';
 import { User } from '../../users/entities/user.entity';
 import { Wishlist } from '../../wishlists/entities/wishlist.entity';
+import { BaseEntity } from 'src/utils/entities';
 
 @Entity()
-export class Wish {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
-
+export class Wish extends BaseEntity {
   @Column()
   @Min(1)
   @Max(250)
   name: string;
 
+  @IsUrl()
   @Column()
   link: string;
 
@@ -37,6 +21,7 @@ export class Wish {
   image: string;
 
   @Column()
+  @IsInt()
   price: number;
 
   @Column({ default: 0 })

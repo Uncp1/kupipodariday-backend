@@ -18,7 +18,6 @@ export class WishlistsService {
   ): Promise<Wishlist> {
     const { itemsId, ...data } = createWishlistDto;
     const items = itemsId.map((id) => ({ id }));
-    //console.log(items, itemsId);
 
     const wishlist = await this.wishlistRepository.create({
       ...data,
