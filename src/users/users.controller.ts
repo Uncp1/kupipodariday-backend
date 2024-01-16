@@ -27,7 +27,6 @@ export class UsersController {
 
   @Get('me')
   findMe(@Req() req: UserRequest): User {
-    console.log(req.user);
     return req.user;
   }
 
