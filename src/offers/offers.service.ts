@@ -21,8 +21,22 @@ export class OffersService {
     const { amount, itemId, hidden } = createOfferDto;
 
     const wish = await this.wishesRepository.findOne({
-      where: { id: itemId },
-      select: { owner: { id: true } },
+      where: {
+        id: itemId,
+      },
+      select: {
+        owner: {
+          id: true,
+          username: true,
+          about: true,
+          avatar: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      },
+      relations: {
+        owner: true,
+      },
     });
 
     if (wish.owner.id === userId) {
@@ -53,11 +67,62 @@ export class OffersService {
     }
   }
   async findAll(): Promise<Offer[]> {
-    return this.offerRepository.find();
+    return this.offerRepository.find({
+      select: {
+        user: {
+          id: true,
+          username: true,
+          about: true,
+          avatar: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      },
+      relations: {
+        user: true,
+      },
+    });
   }
 
   async findOne(id: number): Promise<Offer | object> {
-    const offer = await this.offerRepository.findOne({ where: { id: id } });
+    const offer = await this.offerRepository.findOne({
+      where: { id: id },
+      select: {
+        id: true,
+        createdAt: true,
+        updatedAt: true,
+        item: {
+          id: true,
+          createdAt: true,
+          updatedAt: true,
+          name: true,
+          link: true,
+          image: true,
+          price: true,
+          raised: true,
+          copied: true,
+          description: true,
+          owner: {
+            id: true,
+            username: true,
+            about: true,
+            avatar: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+      },
+      relations: {
+        user: {
+          wishes: true,
+          offers: true,
+        },
+        item: {
+          owner: true,
+          offers: true,
+        },
+      },
+    });
     if (offer.hidden) {
       return new Object();
     }

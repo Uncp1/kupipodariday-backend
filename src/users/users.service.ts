@@ -80,7 +80,43 @@ export class UsersService {
   }
 
   async findUserWishes(username: string): Promise<Wish[]> {
-    const user = await this.findByUsername(username);
+    const user = await this.userRepository.findOne({
+      where: {
+        wishes: {
+          owner: {
+            username: username,
+          },
+        },
+      },
+      select: {
+        wishes: {
+          id: true,
+          createdAt: true,
+          updatedAt: true,
+          name: true,
+          link: true,
+          image: true,
+          price: true,
+          raised: true,
+          copied: true,
+          description: true,
+          owner: {
+            id: true,
+            username: true,
+            about: true,
+            avatar: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+      },
+      relations: {
+        wishes: {
+          owner: true,
+          offers: true,
+        },
+      },
+    });
     if (!user) {
       throw new UserNotFoundException();
     }
