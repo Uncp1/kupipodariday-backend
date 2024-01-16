@@ -17,6 +17,8 @@ export class WishesService {
   ) {}
 
   async create(createWishDto: CreateWishDto, ownerId: number): Promise<Wish> {
+    console.log(ownerId);
+
     const wish = await this.wishesRepository.create({
       ...createWishDto,
       owner: { id: ownerId },
@@ -25,11 +27,60 @@ export class WishesService {
   }
 
   async findAll(): Promise<Wish[]> {
-    return await this.wishesRepository.find();
+    return await this.wishesRepository.find({
+      relations: {
+        owner: true,
+      },
+      select: {
+        owner: {
+          id: true,
+          username: true,
+          about: true,
+          avatar: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      },
+    });
   }
 
   async findOne(id: number): Promise<Wish> {
-    return await this.wishesRepository.findOne({ where: { id: id } });
+    return await this.wishesRepository.findOne({
+      where: { id: id },
+      select: {
+        id: true,
+        createdAt: true,
+        updatedAt: true,
+        name: true,
+        link: true,
+        image: true,
+        price: true,
+        raised: true,
+        copied: true,
+        description: true,
+        owner: {
+          id: true,
+          username: true,
+          about: true,
+          avatar: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+        offers: {
+          id: true,
+          createdAt: true,
+          updatedAt: true,
+          amount: true,
+          hidden: true,
+        },
+      },
+      relations: {
+        owner: true,
+        offers: {
+          user: true,
+        },
+      },
+    });
   }
 
   async findRecentWishes(): Promise<Wish[]> {
@@ -83,7 +134,20 @@ export class WishesService {
       where: {
         id: wishId,
       },
-      select: { owner: { id: true } },
+      select: {
+        owner: {
+          id: true,
+          username: true,
+          about: true,
+          avatar: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      },
+      relations: {
+        owner: true,
+        offers: true,
+      },
     });
     return wish.owner.id === userId ? true : false;
   }

@@ -28,11 +28,42 @@ export class WishlistsService {
   }
 
   async findAll(): Promise<Wishlist[]> {
-    return await this.wishlistRepository.find();
+    return await this.wishlistRepository.find({
+      select: {
+        owner: {
+          id: true,
+          username: true,
+          about: true,
+          avatar: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      },
+      relations: {
+        owner: true,
+        items: true,
+      },
+    });
   }
 
   async findOne(id: number): Promise<Wishlist> {
-    return await this.wishlistRepository.findOne({ where: { id: id } });
+    return await this.wishlistRepository.findOne({
+      where: { id: id },
+      select: {
+        owner: {
+          id: true,
+          username: true,
+          about: true,
+          avatar: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      },
+      relations: {
+        items: true,
+        owner: true,
+      },
+    });
   }
 
   async verifyUser(userId: number, wishlistId: number) {
@@ -40,7 +71,19 @@ export class WishlistsService {
       where: {
         id: wishlistId,
       },
-      select: { owner: { id: true } },
+      select: {
+        owner: {
+          id: true,
+          username: true,
+          about: true,
+          avatar: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      },
+      relations: {
+        owner: true,
+      },
     });
     return wishlist.owner.id === userId ? true : false;
   }

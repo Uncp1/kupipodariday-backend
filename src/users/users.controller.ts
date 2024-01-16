@@ -15,7 +15,6 @@ import { UserRequest } from 'src/utils/types';
 import { Wish } from 'src/wishes/entities/wish.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-
 @UseGuards(JwtGuard)
 @Controller('users')
 export class UsersController {
