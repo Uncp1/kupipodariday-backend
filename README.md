@@ -54,3 +54,8 @@ Backend сервиса вишлистов. В нём каждый зарегис
 ## API сервиса
 
 Описанние API сервиса доступно по [ссылке](https://app.swaggerhub.com/apis/zlocate/KupiPodariDay/1.0.0#).
+
+&copy; Автор - [Фидлер Виктор][author-github]
+
+[//]: # 'Общие переменные автора'
+[author-github]: https://github.com/Uncp1
