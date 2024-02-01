@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { Wish } from 'src/wishes/entities/wish.entity';
+import { Wish } from '../wishes/entities/wish.entity';
 import { CreateUserDto } from './dto/create-user.dto';
-import { HashService } from 'src/hash/hash.service';
+import { HashService } from '../hash/hash.service';
 import {
   UserAlreadyExistsException,
   UserNotFoundException,
-} from 'src/utils/exceptions';
+} from '../utils/exceptions';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()

@@ -3,7 +3,7 @@ import { Min, Max, IsUrl, IsInt } from 'class-validator';
 import { Offer } from '../../offers/entities/offer.entity';
 import { User } from '../../users/entities/user.entity';
 import { Wishlist } from '../../wishlists/entities/wishlist.entity';
-import { BaseEntity } from 'src/utils/entities';
+import { BaseEntity } from '../../utils/entities';
 
 @Entity()
 export class Wish extends BaseEntity {
