@@ -1,7 +1,7 @@
 import { Entity, Column, ManyToOne } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { Wish } from '../../wishes/entities/wish.entity';
-import { BaseEntity } from 'src/utils/entities';
+import { BaseEntity } from '../../utils/entities';
 import { IsInt } from 'class-validator';
 
 @Entity()

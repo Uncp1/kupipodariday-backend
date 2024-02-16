@@ -10,9 +10,9 @@ import {
   Patch,
 } from '@nestjs/common';
 import { WishesService } from './wishes.service';
-import { JwtGuard } from 'src/guards/jwt.guard';
+import { JwtGuard } from '../guards/jwt.guard';
 import { Wish } from './entities/wish.entity';
-import { UserRequest } from 'src/utils/types';
+import { UserRequest } from '../utils/types';
 import { CreateWishDto } from './dto/create-wish-dto';
 import { UpdateWishDto } from './dto/update-wish.dto';
 

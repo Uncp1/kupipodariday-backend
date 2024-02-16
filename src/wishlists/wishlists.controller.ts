@@ -10,9 +10,9 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { WishlistsService } from './wishlists.service';
-import { JwtGuard } from 'src/guards/jwt.guard';
+import { JwtGuard } from '../guards/jwt.guard';
 import { CreateWishlistDto } from './dto/create-wishlist.dto';
-import { UserRequest } from 'src/utils/types';
+import { UserRequest } from '../utils/types';
 import { UpdateWishlistDto } from './dto/update-wishlist.dto';
 
 @UseGuards(JwtGuard)

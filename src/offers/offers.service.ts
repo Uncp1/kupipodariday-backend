@@ -2,7 +2,7 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Offer } from './entities/offer.entity';
 import { Repository } from 'typeorm';
-import { Wish } from 'src/wishes/entities/wish.entity';
+import { Wish } from '../wishes/entities/wish.entity';
 import { CreateOfferDto } from './dto/create-offer.dto';
 
 @Injectable()

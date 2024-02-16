@@ -8,9 +8,9 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { OffersService } from './offers.service';
-import { JwtGuard } from 'src/guards/jwt.guard';
+import { JwtGuard } from '../guards/jwt.guard';
 import { Offer } from './entities/offer.entity';
-import { UserRequest } from 'src/utils/types';
+import { UserRequest } from '../utils/types';
 import { CreateOfferDto } from './dto/create-offer.dto';
 
 @UseGuards(JwtGuard)

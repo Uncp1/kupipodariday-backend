@@ -10,9 +10,9 @@ import {
 } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
-import { JwtGuard } from 'src/guards/jwt.guard';
-import { UserRequest } from 'src/utils/types';
-import { Wish } from 'src/wishes/entities/wish.entity';
+import { JwtGuard } from '../guards/jwt.guard';
+import { UserRequest } from '../utils/types';
+import { Wish } from '../wishes/entities/wish.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 @UseGuards(JwtGuard)
