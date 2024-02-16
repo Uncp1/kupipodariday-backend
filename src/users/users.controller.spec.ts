@@ -131,4 +131,21 @@ describe('UsersController', () => {
 
     expect(findUserWishesSpy).toHaveBeenCalledWith(mockUsername);
   });
+
+  it('.findByUsername() should handle the case when the user is not found', async () => {
+    const mockUsername = 'nonexistentuser';
+    const findByUsernameSpy = jest
+      .spyOn(usersService, 'findByUsername')
+      .mockResolvedValue(null);
+
+    try {
+      await usersController.findByUsername(mockUsername);
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error.code).toBe(404);
+      expect(error.message).toBe('Пользователь не найден');
+    }
+
+    expect(findByUsernameSpy).toHaveBeenCalledWith(mockUsername);
+  });
 });
